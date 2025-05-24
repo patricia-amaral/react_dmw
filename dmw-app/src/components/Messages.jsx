@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import CommentSection from './CommentSection';
 
 export default function Messages() {
   const [messages, setMessages] = useState([]);
