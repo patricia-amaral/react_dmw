@@ -8,7 +8,7 @@ export default function Messages() {
   const url = "http://localhost:3000";
 
   const fetchMessages = async () => {
-    const response = await axios.get(`${url}/messages`, {
+    const response = await axios.get(`${url}/mensagens`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setMessages(response.data);
@@ -16,7 +16,7 @@ export default function Messages() {
 
   const sendMessage = async () => {
     if (newMessage.trim() !== '') {
-      await axios.post(`${url}/messages`, { text: newMessage }, {
+      await axios.post(`${url}/mensagens`, { texto: newMessage }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setNewMessage('');
@@ -35,7 +35,7 @@ export default function Messages() {
       <ul>
         {messages.map((msg) => (
           <li key={msg.id}>
-            {msg.text}
+             <strong>{msg.nome}:</strong> {msg.texto}
           </li>
         ))}
       </ul>

@@ -10,16 +10,25 @@ export const AuthProvider = ({ children }) => {
   const url = "http://localhost:3000";
 
   const login = async (email, senha) => {
-    const response = await axios.post(`${url}/login`, {email, senha });
+    try {
+    const response = await axios.post(`${url}/login`, { email, senha });
     localStorage.setItem('token', response.data.token);
     setUser({ email });
     navigate('/');
-  };
-
+  } catch (err) {
+    alert(err.response?.data?.erro || "Erro ao fazer login");
+  }
+};
+  
   const register = async (nome, email, senha) => {
+  try {
     await axios.post(`${url}/signup`, { nome, email, senha });
     await login(email, senha);
-  };
+  } catch (err) {
+    console.error("Erro no registro:", err.response?.data || err.message);
+    alert(err.response?.data?.erro || "Erro ao registrar");
+  }
+};
 
   const logout = () => {
     localStorage.removeItem('token');
